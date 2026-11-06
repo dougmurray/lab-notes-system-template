@@ -1,0 +1,22 @@
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+.idea/
+# Large raw captures / datasets: keep out of the repo, commit only the figure you reference.
+**/raw/
+# Uncomment to keep generated reviews out of version control:
+# review.html
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+.*.sw?
+Session.vim
+.netrwhist
+*.un~
+tags

@@ -1,0 +1,11 @@
+# Normalise line endings so diffs stay clean across Windows/macOS/Linux.
+*.md   text eol=lf
+*.py   text eol=lf
+*.html text eol=lf
+
+# Optional: store large images in Git LFS (requires `git lfs install` first).
+# Uncomment once LFS is available on the machine.
+# *.png  filter=lfs diff=lfs merge=lfs -text
+# *.jpg  filter=lfs diff=lfs merge=lfs -text
+# *.jpeg filter=lfs diff=lfs merge=lfs -text
+# *.tiff filter=lfs diff=lfs merge=lfs -text

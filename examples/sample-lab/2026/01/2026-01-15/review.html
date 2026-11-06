@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-01-15 (Thursday)</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1c1d1f;--muted:#6b6f76;--line:#e2e3e5;--card:#fff;--accent:#2457c5;--chip:#e9eefb;--code:#f3f4f6}
+@media (prefers-color-scheme:dark){:root{--bg:#141517;--fg:#e6e7e9;--muted:#9a9ea6;--line:#2c2e33;--card:#1b1c1f;--accent:#7aa2f7;--chip:#232a3d;--code:#222428}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 80px}
+h1,h2,h3{line-height:1.25} h1{font-size:1.8rem;margin:.2em 0} h2{font-size:1.25rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.25em}
+.meta{color:var(--muted);font-size:.9rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip,.tag{background:var(--chip);color:var(--accent);border-radius:99px;padding:1px 9px;font-size:.85rem}
+.tag{padding:0 6px;border-radius:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 16px;margin:16px 0}
+.card.open{border-left:4px solid var(--accent)}
+p{white-space:pre-line;margin:.7em 0}
+a{color:var(--accent)} code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em}
+pre{background:var(--code);padding:12px;border-radius:8px;overflow:auto} pre code{padding:0;background:none}
+table{border-collapse:collapse;margin:1em 0;max-width:100%;display:block;overflow-x:auto} th,td{border:1px solid var(--line);padding:5px 10px} th{background:var(--code)}
+blockquote{margin:1em 0;padding:0 14px;border-left:3px solid var(--line);color:var(--muted)}
+img{max-width:100%;height:auto;border-radius:6px} figure{margin:1em 0} figcaption{color:var(--muted);font-size:.88rem;margin-top:4px}
+ul,ol{padding-left:1.5em} li.task{list-style:none;margin-left:-1.2em} li.task input{margin-right:6px} .migrated{color:var(--muted)}
+.math-display{overflow-x:auto;margin:1em 0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:12px 0}
+.gallery figure{margin:0}
+footer{margin-top:3em;color:var(--muted);font-size:.8rem}
+@media print{body{background:#fff;color:#000}main{padding:0}.card{break-inside:avoid}}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+</head><body><main>
+<h1>2026-01-15 (Thursday)</h1>
+<div class="meta"><span>2026-01-15</span> &middot; projects: <span class="chip">example-adc-board</span> &middot; tags: <span class="chip">adc</span><span class="chip">noise</span><span class="chip">example</span></div>
+<p><em>Shorted-input noise measurement shows a 1/f corner near 3 Hz.</em></p>
+<h2>Notes</h2>
+<blockquote><p><strong>Sample note.</strong> Everything in <code>examples/</code> is fictional and exists only to show the format. Delete the folder in your own copy.</p></blockquote>
+<h2 id="to-do-today">To do today</h2>
+<ul><li class="task"><input type="checkbox" disabled checked> Short the ADC inputs and log 10 minutes of data</li><li class="task"><span class="migrated" title="carried over">&rarr;</span> Compare against the datasheet noise table (carried to 2026-01-16)</li><li class="task"><span class="migrated" title="carried over">&rarr;</span> Re-run with the reference buffer bypassed <span class="tag">#todo</span> (carried to 2026-01-16)</li></ul>
+<h2 id="log">Log</h2>
+<ul><li>09:10 Inputs shorted at the connector, board on the bench supply, lid closed.</li><li>09:25 Logged 10 min at 10 SPS. Raw data kept out of the repo; summary in <code>data/noise-density.csv</code>.</li><li>10:05 Input-referred noise looks higher than expected below 3 Hz.</li></ul>
+<h2 id="measurements-results">Measurements / results</h2>
+<p>Thermal noise of the source resistance sets the floor:</p>
+<div class="math-display">$$e_n = \sqrt{4 k T R \,\Delta f}$$</div>
+<p>For <span class="math">$R = 10\,\mathrm{k\Omega}$</span> at 300 K that is about <span class="math">$12.9\,\mathrm{nV}/\sqrt{\mathrm{Hz}}$</span>.</p>
+<table><thead><tr><th style="text-align:left">Frequency</th><th style="text-align:right">Measured (nV/√Hz)</th><th style="text-align:left">Note</th></tr></thead><tbody><tr><td style="text-align:left">0.1 Hz</td><td style="text-align:right">720</td><td style="text-align:left">1/f dominated</td></tr><tr><td style="text-align:left">3 Hz</td><td style="text-align:right">170</td><td style="text-align:left">corner</td></tr><tr><td style="text-align:left">100 Hz</td><td style="text-align:right">41</td><td style="text-align:left">white floor</td></tr></tbody></table>
+<figure><img src="img/2026-01-15-noise-density-shorted-input.png" alt="Noise density with shorted inputs, 1/f corner near 3 Hz" loading="lazy"><figcaption>Noise density with shorted inputs, 1/f corner near 3 Hz</figcaption></figure>
+<h2 id="ideas-questions">Ideas / questions</h2>
+<ul><li>Is the low-frequency excess the reference buffer or the supply? <span class="tag">#noise</span></li><li>Try battery supply to separate the two.</li></ul>
+<h2 id="references">References</h2>
+<ul><li>Datasheet noise table (see project notes)</li></ul>
+<h2>Images</h2><div class="gallery"><figure><a href="img/2026-01-15-noise-density-shorted-input.png"><img src="img/2026-01-15-noise-density-shorted-input.png" loading="lazy"></a><figcaption>img/2026-01-15-noise-density-shorted-input.png</figcaption></figure></div>
+<h2>Files</h2><ul><li><a href="data/noise-density.csv">data/noise-density.csv</a></li></ul>
+<footer>Generated from notes.md by tools/make_review.py &mdash; edit the notes, not this file.</footer>
+</main></body></html>
